@@ -41,4 +41,12 @@ fn main() {
 
     let mut scores: HashMap<String, i32> =
         teams.into_iter().zip(initial_scores.into_iter()).collect();
+
+    use std::net::IpAddr;
+
+    let home: IpAddr = "127.0.0.1".parse().unwrap();
+}
+
+pub fn lol() -> Result<_, _> {
+    let mut f = File::open("hello.txt");
 }
