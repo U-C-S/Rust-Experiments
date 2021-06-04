@@ -1,4 +1,5 @@
 use std::io;
+mod calculate;
 
 fn main() {
     println!("The Calculator\nEnter the equation with spaces");
@@ -8,29 +9,11 @@ fn main() {
 
     let input_split: Vec<&str> = inp.split(" ").collect();
     if input_split.len() == 3 {
-        let x1: f32 = input_split.get(0).expect("error").trim().parse().unwrap();
-        let x2: f32 = input_split.get(2).expect("error").trim().parse().unwrap();
-
-        match input_split.get(1) {
-            Some(&"+") => {
-                let ans = &x1 + &x2;
-                print!("Answer: {}", ans);
-            }
-            Some(&"-") => {
-                let ans = &x1 - &x2;
-                print!("Answer: {}", ans);
-            }
-            Some(&"*") => {
-                let ans = &x1 * &x2;
-                print!("Answer: {}", ans);
-            }
-            Some(&"/") => {
-                let ans = &x1 / &x2;
-                print!("Answer: {}", ans);
-            }
-            Some(_) => println!("This is not a correct operation"),
-            None => println!("Illegal"),
-        }
+        let ans = calculate::calculate(&input_split);
+        match ans {
+            Some(ans) => print!("Answer: {}", ans),
+            None => println!("Something is terribly wrong"),
+        };
     } else {
         println!("Wrong! Enter like this: 2 + 3");
     }
