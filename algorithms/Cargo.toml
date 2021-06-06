@@ -1,6 +1,6 @@
 [package]
-name = "search-algorithm"
-version = "0.1.0"
+name = "algorithms"
+version = "0.2.0"
 authors = ["U-C-S <ucs3721@outlook.com>"]
 edition = "2018"
 

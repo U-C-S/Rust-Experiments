@@ -30,8 +30,9 @@ fn main() {
                 }
                 println!("\nEnter the element to be searched: ");
                 let item: u16 = read!();
+                let arr1 = arr_sorted.clone();
                 let now = Instant::now();
-                let pos = binary_search(&item, arr_sorted.clone());
+                let pos = binary_search(&item, arr1);
                 let elapsed = now.elapsed();
                 println!("Elapsed: {:.2?}", elapsed);
                 println!("Element at index: {}", pos);
@@ -39,8 +40,9 @@ fn main() {
             Some(2) => {
                 println!("Enter the element to be searched: ");
                 let item: u16 = read!();
+                let arr1 = arr.clone();
                 let now = Instant::now();
-                let pos = linear_search(&item, arr.clone());
+                let pos = linear_search(&item, arr1);
                 let elapsed = now.elapsed();
                 println!("Elapsed: {:.2?}", elapsed);
                 println!("Element at index: {}", pos);
