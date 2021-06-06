@@ -4,22 +4,27 @@ pub fn calculate(input: &Vec<&str>) -> Option<f32> {
 
     match input.get(1) {
         Some(&"+") => {
-            let ans = &x1 + &x2;
+            let ans = x1 + x2;
             Some(ans)
         }
         Some(&"-") => {
-            let ans = &x1 - &x2;
+            let ans = x1 - x2;
             Some(ans)
         }
         Some(&"*") => {
-            let ans = &x1 * &x2;
+            let ans = x1 * x2;
             Some(ans)
         }
         Some(&"/") => {
-            let ans = &x1 / &x2;
+            let ans = x1 / x2;
             Some(ans)
         }
         Some(_) => None,
         None => None,
     }
+}
+
+
+fn add_test(){
+    assert_eq!(calculate(vec!["2","+","2"]), 4);
 }
