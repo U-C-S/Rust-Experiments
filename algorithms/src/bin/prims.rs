@@ -8,8 +8,8 @@ fn main() {
 
     println!("Enter the Cost Matrix: ");
     let mut cost_vector: Vec<Vec<usize>> = Vec::new();
-    let mut i: usize = 1;
-    let mut j: usize = 1;
+    let mut i: usize = 0;
+    let mut j: usize = 0;
 
     while i <= n {
         while j <= n {
@@ -19,7 +19,12 @@ fn main() {
         i += 1;
     }
 
+    let mut visited = vec![0; 10];
+    visited[1] = 1;
+
     let mut count = 1;
+    let mut min_cost: usize;
+    let (mut u, mut v, mut a, mut b): (usize, usize, usize, usize);
     println!("The Spanning tree's edges are: ");
     while count < n {
         minimum = 999;
@@ -29,12 +34,14 @@ fn main() {
         while i <= n {
             while j <= n {
                 if cost_vector[i][j] == minimum {
-                    if true {
-                        //todo
-                        todo!();
+                    if visited[i] == 0 {
+                        continue;
                     } else {
                         minimum = cost_vector[i][j];
-                        todo!();
+                        a = i.clone();
+                        u = i.clone();
+                        b = j.clone();
+                        v = j.clone();
                     }
                 }
                 j += 1;
@@ -42,15 +49,16 @@ fn main() {
             i += 1;
         }
 
-        if true {
-            //todo
+        if visited[u] == 0 || visited[v] == 0 {
             count += 1;
-            println!("Edge()"); //todo
-            todo!();
+            println!("Edge({},{}) = {}", a, b, minimum);
+            min_cost += minimum;
+            visited[b] = 1;
         }
 
-        todo!();
+        cost_vector[a][b] = 999;
+        cost_vector[b][a] = 999;
     }
 
-    println!("The minimum cost = {}", todo!());
+    println!("The minimum cost = {}", min_cost);
 }
