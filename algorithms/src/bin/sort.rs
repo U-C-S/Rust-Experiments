@@ -1,6 +1,12 @@
+
 use rand::prelude::*;
 use std::time::Instant;
 use text_io::read;
+
+//      This Program is written by "U Chanakya Srinivas"
+//          USN: 4ni18is106
+//          Class: 4th SEM , Batch 1
+//          Language: Rust (Similar to Modern C++)
 
 fn main() {
     println!("Enter the Array Size: ");
@@ -17,8 +23,8 @@ fn main() {
     loop {
         println!("\nChoose a sort option: ");
         println!("1. Bubble \n2. Selection \n3. Merge \n4. Quick \n5. Exit()");
-        let opt: Option<i8> = Some(read!());
 
+        let opt: Option<i8> = Some(read!());
         match opt {
             Some(1) => {
                 let now = Instant::now();
@@ -58,6 +64,8 @@ fn main() {
         }
     }
 }
+
+//skipped the delays because the many inputs are given
 
 fn bubble_sort(arr: &mut Vec<usize>) {
     let size = arr.len();
@@ -105,7 +113,7 @@ fn quick_sort(arr: &mut Vec<usize>, low: isize, high: isize) {
 }
 
 //helpers all go here--------------
-fn _merge<T: Ord + Copy>(arr: &mut [T], low: usize, mid: usize, high: usize) {
+fn _merge(arr: &mut Vec<usize>, low: usize, mid: usize, high: usize) {
     let mut left_half = Vec::new();
     let mut right_half = Vec::new();
 
@@ -147,7 +155,7 @@ fn _merge<T: Ord + Copy>(arr: &mut [T], low: usize, mid: usize, high: usize) {
     }
 }
 
-fn _partition<T: Ord>(arr: &mut [T], low: isize, high: isize) -> isize {
+fn _partition(arr: &mut Vec<usize>, low: isize, high: isize) -> isize {
     let pivot = high as usize;
     let mut i = low - 1;
     let mut j = high;
@@ -168,5 +176,13 @@ fn _partition<T: Ord>(arr: &mut [T], low: isize, high: isize) -> isize {
         }
     }
     arr.swap(i as usize, pivot as usize);
-    i
+    return i;
 }
+// Inputs : B, S, M, Q -- Time in microseconds
+// 1000 : 550, 613, 365, 233
+// 2000 : 2200, 2450, 730, 750
+// 3000 : 4900, 5500, 1200, 1490
+// 4000 : 8700, 9780, 1550, 2300
+// 5000 : 13650, 15200, 2200, 3250
+// 10000 : 54000, 60400, 4450, 9300
+// 20000 : 214520, 241200,8700,24000
