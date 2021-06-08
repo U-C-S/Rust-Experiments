@@ -22,21 +22,21 @@ fn main() {
 
         match opt {
             Some(1) => {
-                println!("\nThe output of Bubble Sort is: ");
+                print!("\nThe output of Bubble Sort is: ");
                 let arr1 = arr.clone();
                 let now = Instant::now();
                 let arr1 = bubble_sort(size, arr1);
                 let elapsed = now.elapsed();
-                print!("{:?}", &arr1);
+                print!("{:?} \n", &arr1);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(2) => {
-                println!("\nThe output of Selection Sort is: ");
+                print!("\nThe output of Selection Sort is: ");
                 let arr1 = arr.clone();
                 let now = Instant::now();
                 let arr1 = selection_sort(size, arr1);
                 let elapsed = now.elapsed();
-                print!("{:?}", &arr1);
+                print!("{:?} \n", &arr1);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(3) => {}
@@ -50,7 +50,7 @@ fn main() {
 fn bubble_sort(size: usize, mut arr: Vec<usize>) -> Vec<usize> {
     for i in 0..size - 1 {
         for j in 0..size - i - 1 {
-            sleep(Duration::from_secs(1));
+            sleep(Duration::from_millis(100));
             if arr[j] > arr[j + 1] {
                 arr.swap(j, j + 1);
             }
@@ -61,10 +61,10 @@ fn bubble_sort(size: usize, mut arr: Vec<usize>) -> Vec<usize> {
 }
 
 fn selection_sort(size: usize, mut arr: Vec<usize>) -> Vec<usize> {
-    for i in 0..size {
+    for i in 0..size - 1 {
         let mut min = i;
-        for j in 0..size {
-            sleep(Duration::from_secs(1));
+        for j in i + 1..size {
+            sleep(Duration::from_millis(100));
             if arr[min] > arr[j] {
                 min = j;
             }

@@ -6,18 +6,13 @@ fn main() {
 
     println!("Enter the Cost Matrix: ");
     //let mut cost_vector: Vec<Vec<usize>> = Vec::new();
-    let mut cost_matrix: [[usize; 10]; 10];
-    let mut i: usize = 1;
-    let mut j: usize = 1;
+    let mut cost_matrix: Vec<Vec<usize>>;
 
-    while i <= n {
-        while j <= n {
+    for i in 0..n {
+        for j in 0..n {
             cost_matrix[i][j] = read!();
-            j += 1;
         }
         println!("got here");
-        i += 1;
-        j = 1;
     }
 
     println!("{:?}", &cost_matrix);
@@ -30,11 +25,9 @@ fn main() {
     println!("The Spanning tree's edges are: ");
     while count < n {
         let mut minimum = 999;
-        i = 1;
-        j = 1;
 
-        while i <= n {
-            while j <= n {
+        for i in 0..n {
+            for j in 0..n {
                 if cost_matrix[i][j] == minimum {
                     if visited[i] == 0 {
                         continue;
@@ -46,10 +39,7 @@ fn main() {
                         v = j.clone();
                     }
                 }
-                j += 1;
             }
-            i += 1;
-            j = 1;
         }
 
         if visited[u] == 0 || visited[v] == 0 {
