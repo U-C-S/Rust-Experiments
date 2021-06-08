@@ -1,6 +1,5 @@
 use rand::prelude::*;
-use std::thread::sleep;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use text_io::read;
 
 fn main() {
@@ -17,64 +16,157 @@ fn main() {
 
     loop {
         println!("\nChoose a sort option: ");
-        println!("1. Bubble \n2. Selection \n3. Merge \n4. Exit()");
+        println!("1. Bubble \n2. Selection \n3. Merge \n4. Quick \n5. Exit()");
         let opt: Option<i8> = Some(read!());
 
         match opt {
             Some(1) => {
-                print!("\nThe output of Bubble Sort is: ");
-                let arr1 = arr.clone();
                 let now = Instant::now();
-                let arr1 = bubble_sort(size, arr1);
+                bubble_sort(&mut arr);
                 let elapsed = now.elapsed();
-                print!("{:?} \n", &arr1);
+
+                //println!("The output of Bubble Sort is: {:?}", &arr);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(2) => {
-                print!("\nThe output of Selection Sort is: ");
-                let arr1 = arr.clone();
                 let now = Instant::now();
-                let arr1 = selection_sort(size, arr1);
+                selection_sort(&mut arr);
                 let elapsed = now.elapsed();
-                print!("{:?} \n", &arr1);
+
+                //println!("The output of Selection Sort is: {:?}", &arr);
                 println!("Elapsed: {:.2?}", elapsed);
             }
-            Some(3) => {}
-            Some(4) => break,
+            Some(3) => {
+                let now = Instant::now();
+                merge_sort(&mut arr, 0, size - 1);
+                let elapsed = now.elapsed();
+
+                //println!("The output of Merge Sort is: {:?}", &arr);
+                println!("Elapsed: {:.2?}", elapsed);
+            }
+            Some(4) => {
+                let now = Instant::now();
+                quick_sort(&mut arr, 0, (size - 1) as isize);
+                let elapsed = now.elapsed();
+
+                //println!("The output of Quick Sort is: {:?}", &arr);
+                println!("Elapsed: {:.2?}", elapsed);
+            }
+            Some(5) => break,
             Some(_) => continue,
             None => continue,
         }
     }
 }
 
-fn bubble_sort(size: usize, mut arr: Vec<usize>) -> Vec<usize> {
+fn bubble_sort(arr: &mut Vec<usize>) {
+    let size = arr.len();
+
     for i in 0..size - 1 {
         for j in 0..size - i - 1 {
-            sleep(Duration::from_millis(100));
+            //sleep(Duration::from_millis(100));
             if arr[j] > arr[j + 1] {
                 arr.swap(j, j + 1);
             }
         }
     }
-
-    return arr;
 }
 
-fn selection_sort(size: usize, mut arr: Vec<usize>) -> Vec<usize> {
+fn selection_sort(arr: &mut Vec<usize>) {
+    let size = arr.len();
+
     for i in 0..size - 1 {
         let mut min = i;
         for j in i + 1..size {
-            sleep(Duration::from_millis(100));
+            //sleep(Duration::from_millis(100));
             if arr[min] > arr[j] {
                 min = j;
             }
         }
         arr.swap(i, min);
     }
-
-    return arr;
 }
 
-//fn merge_sort() {}
+fn merge_sort(arr: &mut Vec<usize>, low: usize, high: usize) {
+    if low < high {
+        let mid = low + (high - low) / 2;
+        merge_sort(arr, low, mid);
+        merge_sort(arr, mid + 1, high);
+        _merge(arr, low, mid, high);
+    }
+}
 
-//fn quick_sort() {}
+fn quick_sort(arr: &mut Vec<usize>, low: isize, high: isize) {
+    if low < high {
+        let p = _partition(arr, low, high);
+        quick_sort(arr, p + 1, high);
+        quick_sort(arr, low, p - 1);
+    }
+}
+
+//helpers all go here--------------
+fn _merge<T: Ord + Copy>(arr: &mut [T], low: usize, mid: usize, high: usize) {
+    let mut left_half = Vec::new();
+    let mut right_half = Vec::new();
+
+    for v in arr.iter().take(mid + 1).skip(low) {
+        left_half.push(*v);
+    }
+    for v in arr.iter().take(high + 1).skip(mid + 1) {
+        right_half.push(*v);
+    }
+
+    let lsize = left_half.len();
+    let rsize = right_half.len();
+
+    let mut l = 0;
+    let mut r = 0;
+    let mut a = low;
+
+    while l < lsize && r < rsize {
+        if left_half[l] < right_half[r] {
+            arr[a] = left_half[l];
+            l += 1;
+        } else {
+            arr[a] = right_half[r];
+            r += 1;
+        }
+        a += 1;
+    }
+
+    while l < lsize {
+        arr[a] = left_half[l];
+        l += 1;
+        a += 1;
+    }
+
+    while r < rsize {
+        arr[a] = right_half[r];
+        r += 1;
+        a += 1;
+    }
+}
+
+fn _partition<T: Ord>(arr: &mut [T], low: isize, high: isize) -> isize {
+    let pivot = high as usize;
+    let mut i = low - 1;
+    let mut j = high;
+
+    loop {
+        i += 1;
+        while arr[i as usize] < arr[pivot] {
+            i += 1;
+        }
+        j -= 1;
+        while j >= 0 && arr[j as usize] > arr[pivot] {
+            j -= 1;
+        }
+        if i >= j {
+            break;
+        } else {
+            arr.swap(i as usize, j as usize);
+        }
+    }
+    arr.swap(i as usize, pivot as usize);
+    i
+}
