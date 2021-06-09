@@ -4,8 +4,13 @@ use std::thread::sleep;
 use std::time::{Duration, Instant};
 use text_io::read;
 
+//      This Program is written by "U Chanakya Srinivas"
+//          USN: 4ni18is106
+//          Class: 4th SEM , Batch 1
+//          Language: Rust (Similar to Modern C++)
+
 fn main() {
-    println!("Enter the array size:");
+    println!("Enter the size of array:");
     let size: i32 = read!();
 
     println!("Elements are: \n");
@@ -19,16 +24,16 @@ fn main() {
     loop {
         println!("\nChoose a option: ");
         println!("1. Binary Search \n2. Linear Search \n3. Exit()");
-        let opt: Option<i8> = Some(read!());
+        let opt: Option<isize> = Some(read!());
 
         match opt {
             Some(1) => {
                 let arr_sorted = sort(arr.clone());
-                print!("\nSorted list: ");
+                print!("\nThe Sorted list is: ");
                 for i in &arr_sorted {
                     print!("{} ", i);
                 }
-                println!("\nEnter the element to be searched: ");
+                println!("\nEnter the element that you want to search: ");
                 let item: u16 = read!();
 
                 let now = Instant::now();
@@ -36,10 +41,10 @@ fn main() {
                 let elapsed = now.elapsed();
 
                 println!("Elapsed: {:.2?}", elapsed);
-                println!("Element at index: {}", pos);
+                println!("Element is at index: {}", pos);
             }
             Some(2) => {
-                println!("Enter the element to be searched: ");
+                println!("Enter the element that you want to search: ");
                 let item: u16 = read!();
                 let mut arr1 = arr.clone();
 
@@ -48,7 +53,7 @@ fn main() {
                 let elapsed = now.elapsed();
 
                 println!("Elapsed: {:.2?}", elapsed);
-                println!("Element at index: {}", pos);
+                println!("Element is at index: {}", pos);
             }
             Some(3) => break,
             Some(_) => continue,
@@ -61,7 +66,7 @@ fn linear_search(item: &u16, arr: &mut Vec<u16>) -> usize {
     let size = arr.len();
 
     for i in 0..size {
-        sleep(Duration::from_millis(100));
+        sleep(Duration::from_millis(10));
         let curr = arr.get(i).unwrap();
         if item == curr {
             return i + 1;
@@ -76,7 +81,7 @@ pub fn binary_search(item: &u16, arr: Vec<u16>) -> usize {
     let mut right = arr.len();
 
     while left < right {
-        sleep(Duration::from_millis(100));
+        sleep(Duration::from_millis(10));
         let mid = left + (right - left) / 2;
 
         match item.cmp(&arr[mid]) {
@@ -107,3 +112,17 @@ fn sort(arr: Vec<u16>) -> Vec<u16> {
 
     return arr;
 }
+
+/*
+
+Inputs:   LS  ,   BS
+100   : 1.55s , 76ms
+200   : 3.11s , 125ms
+300   : 4.65s , 131ms
+400   : 6.95s , 153ms
+500   : 8.90s , 157ms
+600   : 9.41s , 148ms
+700   : 10.9s , 142ms
+800   : 12.4s
+
+*/

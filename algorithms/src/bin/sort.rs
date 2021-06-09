@@ -26,14 +26,13 @@ fn main() {
         let opt: Option<i8> = Some(read!());
         match opt {
             Some(1) => {
-                println!("The output of Bubble Sort is: {:?}", &arr);
-
                 let mut arr1 = arr.clone();
 
                 let now = Instant::now();
                 bubble_sort(&mut arr1);
                 let elapsed = now.elapsed();
 
+                //println!("The output of Bubble Sort is: {:?}", &arr);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(2) => {
@@ -186,11 +185,12 @@ fn _partition(arr: &mut Vec<usize>, low: isize, high: isize) -> isize {
     arr.swap(i as usize, pivot as usize);
     return i;
 }
-// Inputs : B, S, M, Q -- Time in microseconds
-// 1000 : 550, 613, 365, 233
-// 2000 : 2200, 2450, 730, 750
-// 3000 : 4900, 5500, 1200, 1490
-// 4000 : 8700, 9780, 1550, 2300
-// 5000 : 13650, 15200, 2200, 3250
-// 10000 : 54000, 60400, 4450, 9300
-// 20000 : 214520, 241200,8700,24000
+
+// Inputs : Bubble,Select, Merge, Quick -- Time in microseconds
+// 1000   : 980   , 670  , 410  , 60
+// 2000   : 3700  , 2560 , 830  , 125
+// 3000   : 8650  , 5670 , 1340 , 195
+// 4000   : 16250 , 9950 , 1710 , 260
+// 5000   : 27200 , 15500, 2520 , 331
+// 6000   : 41800 , 22280, 2980 , 390
+// 10000  : 137500, 61100, 4950 , 660
