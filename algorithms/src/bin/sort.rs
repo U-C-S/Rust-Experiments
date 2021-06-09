@@ -1,4 +1,3 @@
-
 use rand::prelude::*;
 use std::time::Instant;
 use text_io::read;
@@ -27,35 +26,44 @@ fn main() {
         let opt: Option<i8> = Some(read!());
         match opt {
             Some(1) => {
+                println!("The output of Bubble Sort is: {:?}", &arr);
+
+                let mut arr1 = arr.clone();
+
                 let now = Instant::now();
-                bubble_sort(&mut arr);
+                bubble_sort(&mut arr1);
                 let elapsed = now.elapsed();
 
-                //println!("The output of Bubble Sort is: {:?}", &arr);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(2) => {
+                let mut arr1 = arr.clone();
+
                 let now = Instant::now();
-                selection_sort(&mut arr);
+                selection_sort(&mut arr1);
                 let elapsed = now.elapsed();
 
-                //println!("The output of Selection Sort is: {:?}", &arr);
+                //println!("The output of Selection Sort is: {:?}", &arr1);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(3) => {
+                let mut arr1 = arr.clone();
+
                 let now = Instant::now();
-                merge_sort(&mut arr, 0, size - 1);
+                merge_sort(&mut arr1, 0, size - 1);
                 let elapsed = now.elapsed();
 
-                //println!("The output of Merge Sort is: {:?}", &arr);
+                //println!("The output of Merge Sort is: {:?}", &arr1);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(4) => {
+                let mut arr1 = arr.clone();
+
                 let now = Instant::now();
-                quick_sort(&mut arr, 0, (size - 1) as isize);
+                quick_sort(&mut arr1, 0, (size - 1) as isize);
                 let elapsed = now.elapsed();
 
-                //println!("The output of Quick Sort is: {:?}", &arr);
+                //println!("The output of Quick Sort is: {:?}", &arr1);
                 println!("Elapsed: {:.2?}", elapsed);
             }
             Some(5) => break,

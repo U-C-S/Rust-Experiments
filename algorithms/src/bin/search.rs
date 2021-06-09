@@ -30,20 +30,23 @@ fn main() {
                 }
                 println!("\nEnter the element to be searched: ");
                 let item: u16 = read!();
-                let arr1 = arr_sorted.clone();
+
                 let now = Instant::now();
-                let pos = binary_search(&item, arr1);
+                let pos = binary_search(&item, arr_sorted);
                 let elapsed = now.elapsed();
+
                 println!("Elapsed: {:.2?}", elapsed);
                 println!("Element at index: {}", pos);
             }
             Some(2) => {
                 println!("Enter the element to be searched: ");
                 let item: u16 = read!();
-                let arr1 = arr.clone();
+                let mut arr1 = arr.clone();
+
                 let now = Instant::now();
-                let pos = linear_search(&item, arr1);
+                let pos = linear_search(&item, &mut arr1);
                 let elapsed = now.elapsed();
+
                 println!("Elapsed: {:.2?}", elapsed);
                 println!("Element at index: {}", pos);
             }
@@ -54,7 +57,7 @@ fn main() {
     }
 }
 
-fn linear_search(item: &u16, arr: Vec<u16>) -> usize {
+fn linear_search(item: &u16, arr: &mut Vec<u16>) -> usize {
     let size = arr.len();
 
     for i in 0..size {
